@@ -1,1 +1,76 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --pink: #ff4f87; --red: #e72e68; --soft: #ffe1eb; --cream: #fff7ef; --dark: #401c2b; --muted: #805364; }
+html { scroll-behavior: smooth; }
+body { min-height: 100vh; font-family: 'Poppins', sans-serif; color: var(--dark); line-height: 1.9; overflow-x: hidden;
+  background: linear-gradient(135deg, #fff0f5, #ffd6e4 40%, #fff5f8 70%, #ffe0eb) fixed; padding-top: 84px; }
+.script { font-family: 'Great Vibes', cursive; font-weight: 400; color: var(--red); line-height: 1.15; }
+
+/* nav + music */
+.nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; gap: 4px; padding: 5px;
+  background: rgba(255,255,255,.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 99px; box-shadow: 0 8px 30px rgba(180,40,90,.15); }
+.nav a { padding: 9px 16px; border-radius: 99px; font-size: 13px; color: var(--muted); text-decoration: none; min-height: 40px; display: grid; place-items: center; }
+.nav a:hover { background: var(--soft); } .nav a.on { background: var(--red); color: #fff; }
+.nav a:focus-visible, .btn:focus-visible, .music-control:focus-visible, .envelope:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+.music-control { position: fixed; top: 14px; right: 14px; z-index: 31; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fff; color: var(--red); font-size: 20px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,.1); }
+.music-control.playing { animation: pulse 1s infinite alternate; }
+@keyframes pulse { to { transform: scale(1.15); } }
+
+/* hero + chapters */
+.hero { max-width: 980px; margin: 0 auto; padding: 40px 24px 30px; text-align: center; }
+.hero h1 { font-size: clamp(44px, 8vw, 78px); margin-bottom: 14px; }
+.hero > p { max-width: 560px; margin: 0 auto 30px; color: var(--muted); }
+.chapter { max-width: 980px; margin: 0 auto; padding: 70px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.chapter.flip .text { order: 2; } .chapter.solo { grid-template-columns: 1fr; max-width: 640px; text-align: center; }
+.chapter h2 { font-size: clamp(38px, 5vw, 54px); margin-bottom: 10px; }
+.text p { margin-bottom: 14px; color: #5a3345; }
+.note { background: var(--cream); border-left: 4px solid var(--pink); border-radius: 10px; padding: 14px 18px; font-weight: 500; box-shadow: 0 8px 24px rgba(180,40,90,.08); }
+.btn { display: inline-block; padding: 14px 28px; border-radius: 14px; background: linear-gradient(135deg, #ff6496, #e72c65); color: #fff; font-weight: 600; text-decoration: none; box-shadow: 0 10px 25px rgba(231,44,101,.25); transition: .3s; }
+.btn:hover { transform: translateY(-3px); }
+
+/* photos: white-bordered, tilted, overlapping */
+.stack { position: relative; aspect-ratio: 1 / 1.2; width: 100%; }
+.hero-stack { aspect-ratio: 16 / 8; max-width: 860px; margin: 0 auto; }
+.stack .snap { position: absolute; width: 54%; }
+.hero-stack .snap { width: 30%; }
+.snap { position: relative; background: #fff; padding: 8px; border-radius: 6px; box-shadow: 0 18px 40px rgba(180,40,90,.22); }
+.snap img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 3px; }
+.snap.empty { background: repeating-linear-gradient(45deg, #fff, #fff 10px, var(--soft) 10px, var(--soft) 20px); }
+.snap.empty img { visibility: hidden; }
+.snap.empty::after { content: "Add " attr(data-file); position: absolute; inset: 8px; display: grid; place-items: center; text-align: center; color: var(--red); font-size: 12px; line-height: 1.4; }
+
+/* scroll reveal (only when JS is on) */
+.js .reveal { opacity: 0; transform: translate(var(--tx, 0), 40px) rotate(var(--r, 0deg)); transition: opacity 1s ease, transform 1s ease; }
+.js .reveal.in { opacity: 1; transform: translate(0, 0) rotate(var(--r, 0deg)); }
+.js .snap.reveal { transition-delay: .15s; }
+
+/* letter */
+.letter-page { padding: 30px 20px 60px; }
+.scene { max-width: 620px; margin: 0 auto; }
+.envelope { display: block; position: relative; width: min(340px, 88%); height: 220px; margin: 60px auto; border: 0; border-radius: 8px; background: #ffb3cd; cursor: pointer; box-shadow: 0 20px 50px rgba(180,40,90,.25); font: inherit; }
+.envelope .flap { position: absolute; inset: 0 0 auto 0; height: 120px; background: #ff8fb3; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .8s; }
+.envelope .seal { position: absolute; top: 82px; left: 50%; transform: translateX(-50%); font-size: 30px; z-index: 2; }
+.envelope .tap { position: absolute; bottom: 18px; left: 0; right: 0; color: var(--red); font-size: 13px; }
+.scene.open .flap { transform: rotateX(180deg); }
+.scene.reading .envelope { display: none; }
+.paper { display: none; position: relative; padding: clamp(28px, 6vw, 56px); background: var(--cream); border-radius: 6px; box-shadow: 0 25px 70px rgba(180,40,90,.22); background-image: repeating-linear-gradient(transparent, transparent 33px, rgba(255,79,135,.10) 34px); }
+.scene.reading .paper { display: block; animation: paperIn 1.1s ease both; }
+@keyframes paperIn { from { opacity: 0; transform: translateY(60px) scale(.96); } to { opacity: 1; transform: none; } }
+.paper h1 { font-size: clamp(46px, 9vw, 64px); margin-bottom: 14px; }
+.paper p { margin-bottom: 16px; }
+.paper .sign { font-size: 38px; margin-top: 24px; text-align: right; } .paper .sign small { font: 400 14px 'Poppins', sans-serif; color: var(--muted); }
+.heart { position: fixed; bottom: -50px; color: #ff5b8e; opacity: 0; pointer-events: none; z-index: 1; animation: floatUp linear forwards; }
+@keyframes floatUp { 0% { transform: translateY(0) rotate(0); opacity: 0; } 20% { opacity: .55; } 100% { transform: translateY(-110vh) rotate(300deg); opacity: 0; } }
+
+.foot { text-align: center; padding: 30px 20px 40px; color: #ad7187; font-size: 12px; } .foot span { color: var(--red); }
+
+@media (max-width: 760px) {
+  body { padding-top: 78px; }
+  .nav a { padding: 8px 12px; font-size: 12px; }
+  .chapter { grid-template-columns: 1fr; gap: 28px; padding: 44px 22px; }
+  .chapter.flip .text { order: 0; }
+  .stack { max-width: 420px; margin: 0 auto; }
+  .hero-stack { aspect-ratio: 1 / .85; } .hero-stack .snap { width: 38%; }
+  .paper .sign { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { .js .reveal, .flap { transition: none; } .scene.reading .paper, .music-control.playing { animation: none; } html { scroll-behavior: auto; } }
 
