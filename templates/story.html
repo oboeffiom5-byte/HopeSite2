@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Our Story{% endblock %}
+{% block content %}
+{% macro snap(file, style='', cls='') %}
+<figure class="snap reveal {{ cls }}" style="{{ style }}" data-file="{{ file }}">
+  <img src="{{ url_for('static', filename='images/' + file) }}" alt="A memory of us" loading="lazy" onerror="this.parentNode.classList.add('empty')">
+</figure>
+{% endmacro %}
+
+<header class="hero">
+  <h1 class="script reveal">Every Love Story Has a Beginning...</h1>
+  <p class="reveal">Hey Hope. Before you scroll, get comfortable. This is our story, told the way I'd tell it if you were sitting right next to me. ❤️</p>
+  <div class="stack hero-stack">
+    {{ snap('hope7.jpg', '--r:-7deg;--tx:-60px;left:2%;top:10%') }}
+    {{ snap('hope2.jpg', '--r:2deg;left:34%;top:0;z-index:2') }}
+    {{ snap('hope5.jpg', '--r:6deg;--tx:60px;right:2%;top:14%') }}
+  </div>
+</header>
+
+<main>
+<section class="chapter">
+  <div class="text reveal">
+    <h2 class="script">How We Met</h2>
+    <p>It was earlier this year, 2026. You were just starting out as a first-year student, and you had questions. Lots of them.</p>
+    <p>I'm fairly sure what caught your attention was that you thought I was intelligent and knew a lot of things. I'll happily let you keep believing that. 😄</p>
+    <p>So we talked. I explained, you asked, I explained again, and slowly the hard stuff started to make sense.</p>
+  </div>
+  <div class="stack">
+    {{ snap('hope1.jpg', '--r:-5deg;--tx:60px;left:0;top:0') }}
+    {{ snap('hope4.jpg', '--r:4deg;--tx:60px;right:0;bottom:0;z-index:2') }}
+  </div>
+</section>
+
+<section class="chapter flip">
+  <div class="text reveal">
+    <h2 class="script">Somewhere Along the Way...</h2>
+    <p>Somewhere along the line, our conversations stopped being only about school.</p>
+    <p>We started to like each other, then we fell in love, and then we were dating. No big announcement. It just happened, and I'm so glad it did.</p>
+  </div>
+  <div class="stack">
+    {{ snap('hope3.jpg', '--r:5deg;--tx:-60px;left:0;top:0') }}
+    {{ snap('hope6.jpg', '--r:-4deg;--tx:-60px;right:0;bottom:0;z-index:2') }}
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="text reveal">
+    <h2 class="script">Our Little Adventures</h2>
+    <p>Then came the date. The big, fancy, unforgettable date. We went out, bought Indomie 😂, and spent time together.</p>
+    <p class="note">Who said a beautiful date must involve an expensive restaurant? Sometimes all you need is good company, laughter and Indomie. 😂❤️</p>
+    <p>No candles, no fancy menu. Just us. Honestly, five stars.</p>
+  </div>
+  <div class="stack">
+    {{ snap('our_date.jpg', '--r:-5deg;--tx:60px;left:0;top:0') }}
+    {{ snap('together.jpg', '--r:4deg;--tx:60px;right:0;bottom:0;z-index:2') }}
+  </div>
+</section>
+
+<section class="chapter solo">
+  <div class="text reveal">
+    <h2 class="script">The Difficult Chapter</h2>
+    <p>I won't pretend it was all smooth. Things happened between us, and at some point we broke up.</p>
+    <p>It was a hard chapter, and I'm not going to dwell on it here. It's part of our story, but it isn't the end of it.</p>
+  </div>
+</section>
+
+<section class="chapter flip">
+  <div class="text reveal">
+    <h2 class="script">Finding Our Way Back</h2>
+    <p>Even so, we found our way back to each other. We made up, and we started dating again.</p>
+    <p>Not because it was easy, but because it was us.</p>
+  </div>
+  <div class="stack">
+    {{ snap('memory1.jpg', '--r:4deg;--tx:-60px;left:15%;top:6%') }}
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="text reveal">
+    <h2 class="script">Where We Are Today</h2>
+    <p>And here we are. Together.</p>
+    <p>I'm grateful for all of it: the funny parts, the Indomie, the hard parts, and the way back. There are so many more memories waiting for us, and I can't wait to make them with you.</p>
+    <p><a class="btn" href="{{ url_for('letter') }}">Read my letter ❤️</a></p>
+  </div>
+  <div class="stack">
+    {{ snap('favourite_moment.jpg', '--r:-4deg;--tx:60px;left:0;top:0') }}
+    {{ snap('memory2.jpg', '--r:5deg;--tx:60px;right:0;bottom:0;z-index:2') }}
+  </div>
+</section>
+</main>
+{% endblock %}
