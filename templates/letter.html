@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}My Letter{% endblock %}
+{% block bodyattr %}data-hearts{% endblock %}
+{% block content %}
+<main class="letter-page">
+  <div class="scene" id="letterScene">
+    <button class="envelope" id="openLetter" aria-expanded="false" aria-label="Open the letter">
+      <span class="flap"></span><span class="seal">❤️</span><span class="tap">Tap to open</span>
+    </button>
+    <article class="paper">
+      <h1 class="script">Dear Hope,</h1>
+      <p>I'm so happy we met. Earlier this year you came with questions about school, and I came with explanations, and neither of us knew we were starting something so much bigger.</p>
+      <p>I love that it began so simply: academic conversations, you trying to understand, me trying to help. Somewhere in those chats I started caring about you in a way that had nothing to do with lectures. Funny how that works.</p>
+      <p>Every memory we share means a lot to me, even the simple ones. 😂</p>
+      <p>We went through hard times, and I won't pretend we didn't. But we found our way back to each other, and I never take that for granted.</p>
+      <p>Thank you for being in my life. I hope we keep making beautiful memories, one after another.</p>
+      <p>I love you, Hope.</p>
+      <p class="sign script">Forever yours ❤️<br><small>Divine</small></p>
+    </article>
+  </div>
+</main>
+{% endblock %}
